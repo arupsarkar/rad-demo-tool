@@ -5,6 +5,7 @@ const cors = require('cors');
 const path =require("path");
 const port = process.env.PORT || 3003;
 
+const db = require('./queries');
 // Setup HTTP Server
 const app = express();
 // Initialize session
@@ -30,6 +31,12 @@ app.get('/*', function(req,res) {
 app.get('/api', (req, res, next) => {
   res.status(200).send({"data " : "hello world !!!"});
 });
+
+app.get('/users', db.getLeads);
+app.get('/users/:id', db.getLeadById);
+app.post('/users', db.createLead);
+app.put('/users/:id', db.updateLead);
+app.delete('/users/:id', db.deleteLead);
 
 //router call -END
 app.listen(port, function (req, res) {
