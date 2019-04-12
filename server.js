@@ -32,11 +32,11 @@ app.get('/api', (req, res, next) => {
   res.status(200).send({"data " : "hello world !!!"});
 });
 
-app.get('/users', db.getLeads);
-app.get('/users/:id', db.getLeadById);
-app.post('/users', db.createLead);
-app.put('/users/:id', db.updateLead);
-app.delete('/users/:id', db.deleteLead);
+app.get('/leads', db.getLeads);
+app.get('/leads/:id', db.getLeadById);
+app.post('/leads', db.createLead);
+app.put('/leads/:id', db.updateLead);
+app.delete('/leads/:id', db.deleteLead);
 
 //router call -END
 app.listen(port, function (req, res) {

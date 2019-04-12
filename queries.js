@@ -20,7 +20,7 @@ const getLeads = (request, response) => {
 
 const getLeadById = (request, response) => {
   const id = parseInt(request.params.id);
-
+  console.log('---> getLeadById : ', id);
   pool.query('SELECT * FROM leads WHERE id = $1', [id], (error, results) => {
     if (error) {
       throw error
@@ -30,6 +30,7 @@ const getLeadById = (request, response) => {
 };
 
 const createLead = (request, response) => {
+  console.log('---> createLead : ', request.body);
   const { createddate, email, firstname, isdeleted, lastname, mobilephone, name, postalcode, sms_opt_in__c, systemmodstamp } = request.body;
 
   pool.query('INSERT INTO leads (createddate, email, firstname, isdeleted, lastname, mobilephone, name, postalcode, sms_opt_in__c, systemmodstamp) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)', [name, email], (error, results) => {
@@ -43,7 +44,7 @@ const createLead = (request, response) => {
 const updateLead = (request, response) => {
   const id = parseInt(request.params.id);
   const { name, email } = request.body;
-
+  console.log('---> updateLead : ', request.body);
   pool.query(
     'UPDATE leads SET email = $1, firstname = $2, lastname = $3, mobilephone = $4, postalcode = $5, sms_opt_in__c = $6 WHERE id = ' + id,
     [name, email, id],
@@ -58,7 +59,7 @@ const updateLead = (request, response) => {
 
 const deleteLead = (request, response) => {
   const id = parseInt(request.params.id);
-
+  console.log('---> deleteLead', id);
   pool.query('DELETE FROM leads WHERE id = $1', [id], (error, results) => {
     if (error) {
       throw error
