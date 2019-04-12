@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'rad-demo-tool';
+  title = 'RAD Demo Tool';
+  public isAuthenticated: boolean;
+
+  login() {
+  }
+
+  logout() {
+  }
+
 }
