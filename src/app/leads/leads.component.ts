@@ -10,7 +10,8 @@ import { Lead } from './lead';
   styleUrls: ['./leads.component.css']
 })
 export class LeadsComponent implements OnInit {
-  displayedColumns: string[] = ['firstname', 'lastname', 'email', 'mobile', 'edit', 'delete'];
+  // displayedColumns: string[] = ['firstname', 'lastname', 'email', 'mobile', 'edit', 'delete'];
+  displayedColumns: string[] = ['firstname'];
   dataSource = new MatTableDataSource<any>();
   selectedLead: Lead = new Lead();
   loading = false;
