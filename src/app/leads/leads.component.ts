@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material';
+import { LeadsService } from './leads.service';
+import { Lead } from './lead';
+
 
 @Component({
   selector: 'app-leads',
@@ -6,10 +10,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./leads.component.css']
 })
 export class LeadsComponent implements OnInit {
+  displayedColumns: string[] = ['firstname', 'lastname', 'email', 'mobile', 'edit', 'delete'];
+  dataSource = new MatTableDataSource<any>();
+  selectedLead: Lead = new Lead();
+  loading = false;
 
-  constructor() { }
+  constructor(public leadService: LeadsService) { }
 
   ngOnInit() {
+    this.refresh();
+  }
+
+  async refresh() {
+    this.loading = true;
+    const data = await this.leadService.getLeads();
+    this.dataSource.data = data;
+    this.loading = false;
   }
 
 }
