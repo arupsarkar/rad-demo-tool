@@ -16,7 +16,7 @@ export class LeadsComponent implements OnInit {
   selectedLead: Lead = new Lead();
   loading = false;
 
-  constructor(public leadService: LeadsService) { }
+  constructor(public leadsService: LeadsService) { }
 
   ngOnInit() {
     this.refresh();
@@ -24,7 +24,7 @@ export class LeadsComponent implements OnInit {
 
   async refresh() {
     this.loading = true;
-    const data = await this.leadService.getLeads();
+    const data = await this.leadsService.getLeads();
     this.dataSource.data = data;
     this.loading = false;
   }

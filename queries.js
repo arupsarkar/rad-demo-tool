@@ -12,7 +12,10 @@ const pool = new Pool({
 const getLeads = (request, response) => {
   pool.query('SELECT * FROM leads ORDER BY id ASC', (error, results) => {
     if (error) {
+      console.log('getLeads error : ' + error);
       throw error
+    }else{
+      console.log('getLeads success : ' + results);
     }
     response.status(200).json(results.rows)
   })
