@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { AppMaterial } from './app.material';
 import { LeadsComponent } from './leads/leads.component';
 import { HomeComponent } from './home/home.component';
-import {MatTableModule} from '@angular/material';
+import {MatListModule, MatTableModule} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -24,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     FlexLayoutModule,
     BrowserAnimationsModule,
     MatTableModule,
-    HttpClientModule
+    HttpClientModule,
+    MatListModule
   ],
   exports: [
     FlexLayoutModule

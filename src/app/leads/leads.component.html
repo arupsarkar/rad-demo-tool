@@ -1,6 +1,8 @@
 <h1 class="h1">Leads</h1>
-<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch" class="leads">
-  <mat-table [dataSource]="dataSource" class="mat-elevation-z1" fxFlex="100%" fxFlex.gt-sm="66%">
+<!--<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch" class="leads">-->
+<div>
+<!--  <table mat-table [dataSource]="dataSource" class="mat-elevation-z1" fxFlex="100%" fxFlex.gt-sm="66%">-->
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z1">
     <ng-container matColumnDef="firstname">
       <th mat-header-cell *matHeaderCellDef> First Name </th>
       <td mat-cell *matCellDef="let lead"> {{lead.firstname}}</td>
@@ -45,6 +47,8 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 
-  </mat-table>
+  </table>
+  <mat-divider [vertical]="true" fxShow="false" fxShow.gt-sm="66%"></mat-divider>
+
 </div>
 
