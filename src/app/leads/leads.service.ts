@@ -57,6 +57,7 @@ export class LeadsService {
   /** GET Leads from the server */
   getLeads (): Observable<Lead[]> {
     const url = this.baseUrl + '/api/leads';
+    console.log('getLeads URL : ' + url);
     return this.http.get<Lead[]>(url)
       .pipe(
         tap(res => {

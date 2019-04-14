@@ -27,7 +27,14 @@ export class LeadsComponent implements OnInit {
 
   getLeads(): void {
     this.leadsService.getLeads()
-      .subscribe(leads => this.leads = leads);
+      .subscribe(leads => {
+        console.log('getEvent leads component START ' );
+        this.leads = leads;
+        console.log('getEvent leads component data ' + this.leads );
+        console.log('getEvent leads component END ' );
+      }, error => {
+        console.log('getLeads components error' + error);
+      });
   }
   // async refresh() {
   //   this.loading = true;
