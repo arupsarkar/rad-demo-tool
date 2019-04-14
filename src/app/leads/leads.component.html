@@ -7,22 +7,22 @@
     </ng-container>
 
 
-    <ng-container matColumnDef="edit">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let lead">
-        <button mat-icon-button (click)="editLead(lead)">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="delete">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let lead">
-        <button mat-icon-button (click)="deleteLead(lead)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
+<!--    <ng-container matColumnDef="edit">-->
+<!--      <th mat-header-cell *matHeaderCellDef></th>-->
+<!--      <td mat-cell *matCellDef="let lead">-->
+<!--        <button mat-icon-button (click)="editLead(lead)">-->
+<!--          <mat-icon>edit</mat-icon>-->
+<!--        </button>-->
+<!--      </td>-->
+<!--    </ng-container>-->
+<!--    <ng-container matColumnDef="delete">-->
+<!--      <th mat-header-cell *matHeaderCellDef></th>-->
+<!--      <td mat-cell *matCellDef="let lead">-->
+<!--        <button mat-icon-button (click)="deleteLead(lead)">-->
+<!--          <mat-icon>delete</mat-icon>-->
+<!--        </button>-->
+<!--      </td>-->
+<!--    </ng-container>-->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 

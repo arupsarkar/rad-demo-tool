@@ -9,6 +9,7 @@ import { AppMaterial } from './app.material';
 import { LeadsComponent } from './leads/leads.component';
 import { HomeComponent } from './home/home.component';
 import {MatTableModule} from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {MatTableModule} from '@angular/material';
     FlexLayoutModule,
     BrowserAnimationsModule,
     MatTableModule,
+    HttpClientModule
   ],
   exports: [
     FlexLayoutModule

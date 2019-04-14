@@ -1,49 +1,88 @@
 import { Injectable, } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Lead } from './lead';
+import {Observable, of} from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
-const baseUrl = 'http://rad-demo-tool.herokuapp.com';
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class LeadsService {
-
+  private baseUrl = 'https://rad-demo-tool.herokuapp.com'; // URL to web api
   constructor(private http: HttpClient) {}
 
-    private async request (method: string, url: string, data?: any) {
-      console.log('request ' + JSON.stringify(data));
-      const result = this.http.request(method, url, {
-        body: data,
-        responseType: 'json',
-        observe: 'body',
-        headers: {}
-      });
-      return new Promise<any>((resolve, reject) => {
-        result.subscribe(resolve as any, reject as any);
-      });
-    }
 
-  getLeads() {
-    return this.request('get', `${baseUrl}/leads`);
+  //   private async request (method: string, url: string, data?: any) {
+  //     console.log('request ' + JSON.stringify(data));
+  //     const result = this.http.request(method, url, {
+  //       body: data,
+  //       responseType: 'json',
+  //       observe: 'body',
+  //       headers: {}
+  //     });
+  //     return new Promise<any>((resolve, reject) => {
+  //       result.subscribe(resolve as any, reject as any);
+  //     });
+  //   }
+  //
+  // getLeads() {
+  //   return this.request('get', `${baseUrl}/leads`);
+  // }
+  //
+  // getLead(id: string) {
+  //   return this.request('get', `${baseUrl}/lead/${id}`);
+  // }
+  //
+  // createLead(lead: Lead) {
+  //   console.log('createLead ' + JSON.stringify(lead));
+  //   return this.request('post', `${baseUrl}/lead`, lead);
+  // }
+  //
+  // updateLead(lead: Lead) {
+  //   console.log('updateLead ' + JSON.stringify(lead));
+  //   return this.request('post', `${baseUrl}/lead/${lead.id}`, lead);
+  // }
+  //
+  // deleteLead(id: string) {
+  //   return this.request('delete', `${baseUrl}/lead/${id}`);
+  // }
+
+  /** GET Leads from the server */
+  getLeads (): Observable<Lead[]> {
+    return this.http.get<Lead[]>(this.baseUrl)
+      .pipe(
+        tap(_ => this.log('fetched leads')),
+        catchError(this.handleError<Lead[]>('getLeads', []))
+      );
   }
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
 
-  getLead(id: string) {
-    return this.request('get', `${baseUrl}/lead/${id}`);
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
-
-  createLead(lead: Lead) {
-    console.log('createLead ' + JSON.stringify(lead));
-    return this.request('post', `${baseUrl}/lead`, lead);
+  /** Log a HeroService message with the MessageService */
+  private log(message: string) {
+    console.log(`HeroService: ${message}`);
   }
-
-  updateLead(lead: Lead) {
-    console.log('updateLead ' + JSON.stringify(lead));
-    return this.request('post', `${baseUrl}/lead/${lead.id}`, lead);
-  }
-
-  deleteLead(id: string) {
-    return this.request('delete', `${baseUrl}/lead/${id}`);
-  }
-
 }

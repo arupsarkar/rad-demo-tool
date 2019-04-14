@@ -12,21 +12,28 @@ import { Lead } from './lead';
 export class LeadsComponent implements OnInit {
   // displayedColumns: string[] = ['firstname', 'lastname', 'email', 'mobile', 'edit', 'delete'];
   displayedColumns: string[] = ['firstname'];
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<Lead>();
   selectedLead: Lead = new Lead();
   loading = false;
-
+  leads: Lead[];
   constructor(public leadsService: LeadsService) { }
 
   ngOnInit() {
-    this.refresh();
+    this.getLeads();
+    this.dataSource = new MatTableDataSource(this.leads);
+    // this.refresh();
+
   }
 
-  async refresh() {
-    this.loading = true;
-    const data = await this.leadsService.getLeads();
-    this.dataSource.data = data;
-    this.loading = false;
+  getLeads(): void {
+    this.leadsService.getLeads()
+      .subscribe(leads => this.leads = leads);
   }
+  // async refresh() {
+  //   this.loading = true;
+  //   const data = this.leads;
+  //   this['dataSource'].data = data;
+  //   this.loading = false;
+  // }
 
 }
