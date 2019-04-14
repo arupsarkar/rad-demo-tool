@@ -56,7 +56,8 @@ export class LeadsService {
 
   /** GET Leads from the server */
   getLeads (): Observable<Lead[]> {
-    return this.http.get<Lead[]>(this.baseUrl)
+    const url = this.baseUrl + '/leads';
+    return this.http.get<Lead[]>(url)
       .pipe(
         tap(_ => this.log('fetched leads')),
         catchError(this.handleError<Lead[]>('getLeads', []))
