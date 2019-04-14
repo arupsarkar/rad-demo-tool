@@ -16,12 +16,11 @@ export class LeadsComponent implements OnInit {
   selectedLead: Lead = new Lead();
   loading = false;
   leads: Lead[];
-  constructor(public leadsService: LeadsService) { }
+  constructor(public leadsService: LeadsService) {}
 
   ngOnInit() {
     console.log('ngOnInit leads component START ' );
     this.getLeads();
-    this.dataSource = new MatTableDataSource(this.leads);
     console.log('ngOnInit leads component END ' );
     // this.refresh();
 
@@ -34,6 +33,7 @@ export class LeadsComponent implements OnInit {
         console.log('getEvent leads component START ' );
         this.leads = leads;
         console.log('getEvent leads component data ' + this.leads );
+        this.dataSource = new MatTableDataSource(this.leads);
         console.log('getEvent leads component END ' );
       }, error => {
         console.log('getLeads components error' + error);
