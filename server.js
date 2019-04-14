@@ -48,7 +48,7 @@ router.post('/leads', db.createLead);
 router.put('/leads/:id', db.updateLead);
 router.delete('/leads/:id', db.deleteLead);
 
-
+app.use('/', router);
 //router call -END
 app.listen(port, function (req, res) {
   console.log('RAD Demo tool node server running on port ' + port);
