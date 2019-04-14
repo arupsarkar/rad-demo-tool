@@ -15,7 +15,7 @@ const getLeads = (request, response) => {
       console.log('getLeads error : ' + error);
       throw error
     }else{
-      console.log('getLeads success : ' + results);
+      console.log('getLeads success : ' + JSON.stringify(results.rows));
     }
     response.status(200).json(results.rows)
   })

@@ -59,7 +59,10 @@ export class LeadsService {
     const url = this.baseUrl + '/api/leads';
     return this.http.get<Lead[]>(url)
       .pipe(
-        tap(_ => this.log('fetched leads')),
+        tap(res => {
+          this.log('fetched leads : ' + res);
+          console.log(JSON.stringify(res));
+        }),
         catchError(this.handleError<Lead[]>('getLeads', []))
       );
   }
@@ -84,6 +87,6 @@ export class LeadsService {
   }
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
-    console.log(`HeroService: ${message}`);
+    console.log(' Leads service : ', message);
   }
 }
