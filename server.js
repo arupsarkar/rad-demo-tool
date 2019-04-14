@@ -8,6 +8,7 @@ const port = process.env.PORT || 3003;
 const db = require('./queries');
 // Setup HTTP Server
 const app = express();
+const router = express.Router();
 // Initialize session
 app.use(session(
   {
@@ -21,22 +22,32 @@ app.use(cors());
 // bodyParser
 app.use(bodyParser.json());
 app.use(
-  bodyParser.urlencoded({extended: true})
+  bodyParser.urlencoded({extended: false})
 );
-// app.use(express.static(__dirname + '/dist/rad-demo-tool'));
-// app.use('/*', function(req,res) {
-//   res.sendFile(path.join(__dirname+'/dist/rad-demo-tool/index.html'));
-// });
+app.use(express.static(__dirname + '/dist/rad-demo-tool'));
+app.use('/*', function(req,res) {
+  res.sendFile(path.join(__dirname+'/dist/rad-demo-tool/index.html'));
+});
 //router call -START
-app.get('/api', (req, res, next) => {
+
+// route middleware that will happen on every request
+router.use(function(req, res, next) {
+  // log each request to the console
+  console.log(req.method, req.url);
+  // continue doing what we were doing and go to the route
+  next();
+});
+
+router.get('/api', (req, res, next) => {
   res.status(200).send({"data " : "hello world !!!"});
 });
 
-app.get('/leads', db.getLeads);
-app.get('/leads/:id', db.getLeadById);
-app.post('/leads', db.createLead);
-app.put('/leads/:id', db.updateLead);
-app.delete('/leads/:id', db.deleteLead);
+router.get('/leads', db.getLeads);
+router.get('/leads/:id', db.getLeadById);
+router.post('/leads', db.createLead);
+router.put('/leads/:id', db.updateLead);
+router.delete('/leads/:id', db.deleteLead);
+
 
 //router call -END
 app.listen(port, function (req, res) {
