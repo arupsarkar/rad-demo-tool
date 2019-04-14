@@ -11,7 +11,7 @@ import { Lead } from './lead';
 })
 export class LeadsComponent implements OnInit {
   // displayedColumns: string[] = ['firstname', 'lastname', 'email', 'mobile', 'edit', 'delete'];
-  displayedColumns: string[] = ['firstname'];
+  displayedColumns: string[] = ['firstname', 'lastname', 'email', 'mobilephone', 'postalcode'];
   dataSource = new MatTableDataSource<Lead>();
   selectedLead: Lead = new Lead();
   loading = false;
