@@ -19,13 +19,16 @@ export class LeadsComponent implements OnInit {
   constructor(public leadsService: LeadsService) { }
 
   ngOnInit() {
+    console.log('ngOnInit leads component START ' );
     this.getLeads();
     this.dataSource = new MatTableDataSource(this.leads);
+    console.log('ngOnInit leads component END ' );
     // this.refresh();
 
   }
 
   getLeads(): void {
+    console.log('getEvent leads component before service START ' );
     this.leadsService.getLeads()
       .subscribe(leads => {
         console.log('getEvent leads component START ' );
