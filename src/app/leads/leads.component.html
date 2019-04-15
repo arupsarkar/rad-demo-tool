@@ -49,29 +49,39 @@
   </table>
   <mat-divider fxShow.gt-sm [vertical]="true" fxShow="false" ></mat-divider>
     <div>
-      <h2>Selected Lead</h2>
+      <h2>Lead Details</h2>
       <mat-form-field appearance="outline">
         <mat-label>First Name</mat-label>
-        <input matInput placeholder="First Name" [(ngModel)]="selectedLead.firstname">
-        <mat-icon matSuffix>Required</mat-icon>
+        <input matInput placeholder="First Name" [(ngModel)]="selectedLead.firstname" required>
         <mat-hint>First Name</mat-hint>
       </mat-form-field>
 
-<!--      <label>First Name-->
-<!--        <input type="text" [(ngModel)]="selectedLead.firstname">-->
-<!--      </label>-->
-      <label>Last Name
-        <input type="text" [(ngModel)]="selectedLead.lastname">
-      </label>
-      <label>Email
-        <input type="text" [(ngModel)]="selectedLead.email">
-      </label>
-      <label>Mobile
-        <input type="text" [(ngModel)]="selectedLead.mobilephone">
-      </label>
-      <label>Zipcode
-        <input type="text" [(ngModel)]="selectedLead.postalcode">
-      </label>
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Last Name" [(ngModel)]="selectedLead.lastname" required>
+        <mat-hint>Last Name</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" [(ngModel)]="selectedLead.email" required>
+        <mat-icon>Email</mat-icon>
+        <mat-hint>Email</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Phone</mat-label>
+        <input matInput placeholder="Phone" [(ngModel)]="selectedLead.mobilephone">
+        <mat-icon>Phone</mat-icon>
+        <mat-hint>Phone</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Postal Code</mat-label>
+        <input matInput placeholder="Postal Code" [(ngModel)]="selectedLead.postalcode">
+        <mat-hint>Postal Code</mat-hint>
+      </mat-form-field>
+
       <button mat-flat-button color="primary" (click)="updateLead(selectedLead) ">{{(selectedLead.id !== undefined)?'Update':'Create'}}</button>
     </div>
 
