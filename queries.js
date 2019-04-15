@@ -38,12 +38,12 @@ const createLead = (request, response) => {
 
   pool.query('INSERT INTO leads (createddate, email, firstname, isdeleted, lastname, mobilephone, name, ' +
                                 'postalcode, sms_opt_in__c, systemmodstamp) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
-    [createddate, email, firstname, isdeleted, lastname, mobilephone, name, postalcode, sms_opt_in__c, systemmodstamp], (error, results) => {
-    if (error) {
-      throw error
+    [createddate, email, firstname, isdeleted, lastname, mobilephone, name, postalcode, sms_opt_in__c, systemmodstamp], (err, res) => {
+    if (err) {
+      throw err
     }
-    console.log('createLead results ', results);
-    response.status(201).send(`Lead added with ID: ${results.id}`)
+    console.log('createLead results ', res.rows[0].id);
+    response.status(201).send(`Lead added with ID: ${res.rows[0].id}`)
   })
 };
 
