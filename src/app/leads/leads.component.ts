@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import { LeadsService } from './leads.service';
 import { Lead } from './lead';
@@ -9,7 +9,7 @@ import { Lead } from './lead';
   templateUrl: './leads.component.html',
   styleUrls: ['./leads.component.css']
 })
-export class LeadsComponent implements OnInit {
+export class LeadsComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['firstname', 'lastname', 'email', 'mobilephone', 'postalcode', 'edit', 'delete'];
   dataSource = new MatTableDataSource<Lead>();
   selectedLead: Lead = new Lead();
@@ -24,13 +24,15 @@ export class LeadsComponent implements OnInit {
   ngOnInit() {
     console.log('ngOnInit leads component START ' );
     this.getLeads();
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
     console.log('ngOnInit leads component END ' );
-    // this.refresh();
-
   }
 
+  ngAfterViewInit(): void {
+    console.log('ngAfterViewInit() - Start');
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    console.log('ngAfterViewInit() - End');
+  }
 
 
   getLeads(): void {
