@@ -44,6 +44,8 @@ export class LeadsComponent implements OnInit {
     if (this.selectedLead.id !== undefined) {
       console.log('leads component id ', lead.id);
     } else {
+      lead.createddate = new Date();
+      lead.systemmodstamp = new Date();
       console.log('new lead first name ', lead.firstname);
       console.log('new lead last name ', lead.lastname);
       console.log('new lead email ', lead.email);

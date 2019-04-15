@@ -1,8 +1,7 @@
-import {Time} from '@angular/common';
 
 export class Lead {
   id?: number;
-  createddate: Time;
+  createddate: Date;
   email: string;
   firstname: string;
   isdeleted: boolean;
@@ -11,5 +10,5 @@ export class Lead {
   name: string;
   postalcode: string;
   sms_opt_in__c: boolean;
-  systemmodstamp: Time;
+  systemmodstamp: Date;
  }
