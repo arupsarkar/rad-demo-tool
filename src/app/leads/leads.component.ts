@@ -39,6 +39,18 @@ export class LeadsComponent implements OnInit {
         console.log('getLeads components error' + error);
       });
   }
+
+  updateLead(lead: Lead): void {
+    if (this.selectedLead.id !== undefined) {
+
+    } else {
+      this.leadsService.createLead(lead);
+    }
+    this.selectedLead = new Lead();
+  }
+  editLead(lead: Lead): void {
+    this.selectedLead = lead;
+  }
   // async refresh() {
   //   this.loading = true;
   //   const data = this.leads;

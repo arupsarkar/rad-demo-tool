@@ -25,14 +25,15 @@
       <th mat-header-cell *matHeaderCellDef> Zipcode </th>
       <td mat-cell *matCellDef="let lead"> {{lead.postalcode}}</td>
     </ng-container>
-<!--    <ng-container matColumnDef="edit">-->
-<!--      <th mat-header-cell *matHeaderCellDef></th>-->
-<!--      <td mat-cell *matCellDef="let lead">-->
-<!--        <button mat-icon-button (click)="editLead(lead)">-->
-<!--          <mat-icon>edit</mat-icon>-->
-<!--        </button>-->
-<!--      </td>-->
-<!--    </ng-container>-->
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let lead">
+        <button mat-icon-button (click)="editLead(lead)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 <!--    <ng-container matColumnDef="delete">-->
 <!--      <th mat-header-cell *matHeaderCellDef></th>-->
 <!--      <td mat-cell *matCellDef="let lead">-->
@@ -47,6 +48,10 @@
 
   </table>
   <mat-divider [vertical]="true" fxShow="false" fxShow.gt-sm="66%"></mat-divider>
+    <div>
+      <h2>Selected Lead</h2>
+
+    </div>
 
 </div>
 

@@ -67,6 +67,15 @@ export class LeadsService {
         catchError(this.handleError<Lead[]>('getLeads', []))
       );
   }
+
+  createLead(lead: Lead): Observable<Lead> {
+    return this.http.post(this.baseUrl, lead, httpOptions).pipe(
+      tap((newLead: Lead) => {
+        console.log('new lead id ', newLead.id);
+      }),
+      catchError(this.handleError<Lead>('add Lead'))
+    );
+  }
   /**
    * Handle Http operation that failed.
    * Let the app continue.
