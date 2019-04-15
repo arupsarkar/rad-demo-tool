@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {MatSort, MatTableDataSource} from '@angular/material';
 import { LeadsService } from './leads.service';
 import { Lead } from './lead';
 
@@ -9,13 +9,16 @@ import { Lead } from './lead';
   templateUrl: './leads.component.html',
   styleUrls: ['./leads.component.css']
 })
-export class LeadsComponent implements OnInit {
+export class LeadsComponent implements OnInit, AfterViewInit {
   // displayedColumns: string[] = ['firstname', 'lastname', 'email', 'mobile', 'edit', 'delete'];
   displayedColumns: string[] = ['firstname', 'lastname', 'email', 'mobilephone', 'postalcode', 'edit', 'delete'];
   dataSource = new MatTableDataSource<Lead>();
   selectedLead: Lead = new Lead();
   loading = false;
   leads: Lead[];
+
+  @ViewChild(MatSort) sort: MatSort;
+
   constructor(public leadsService: LeadsService) {}
 
   ngOnInit() {
@@ -24,6 +27,10 @@ export class LeadsComponent implements OnInit {
     console.log('ngOnInit leads component END ' );
     // this.refresh();
 
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
   }
 
   getLeads(): void {
