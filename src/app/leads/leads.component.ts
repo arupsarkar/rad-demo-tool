@@ -42,8 +42,15 @@ export class LeadsComponent implements OnInit {
 
   updateLead(lead: Lead): void {
     if (this.selectedLead.id !== undefined) {
-
+      console.log('leads component id ', lead.id);
     } else {
+      console.log('new lead first name ', lead.firstname);
+      console.log('new lead last name ', lead.lastname);
+      console.log('new lead email ', lead.email);
+      console.log('new lead mobile ', lead.mobilephone);
+      lead.name = lead.firstname + ' ' + lead.lastname;
+      console.log('new lead name ', lead.name);
+      lead.sms_opt_in__c = false;
       this.leadsService.createLead(lead);
     }
     this.selectedLead = new Lead();

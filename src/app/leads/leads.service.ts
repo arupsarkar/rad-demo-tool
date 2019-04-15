@@ -69,7 +69,8 @@ export class LeadsService {
   }
 
   createLead(lead: Lead): Observable<Lead> {
-    return this.http.post(this.baseUrl, lead, httpOptions).pipe(
+    const url = this.baseUrl + '/api/leads';
+    return this.http.post(url, lead, httpOptions).pipe(
       tap((newLead: Lead) => {
         console.log('new lead id ', newLead.id);
       }),
