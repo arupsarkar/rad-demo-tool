@@ -1,5 +1,5 @@
 <h1 class="h1">Leads</h1>
-<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch" class="leads">
+<!--<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch" class="leads">-->
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z1" fxFlex="100%" fxFlex.gt-sm="66%" matSort>
     <ng-container matColumnDef="firstname">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
@@ -45,9 +45,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch" class="leads">
-    <mat-paginator [pageSize]="2" [pageSizeOptions]="[2, 4, 6, 10, 20]" showFirstLastButtons></mat-paginator>
-  </div>
+  <mat-paginator [pageSize]="2" [pageSizeOptions]="[2, 4, 6, 10, 20]" showFirstLastButtons></mat-paginator>
 
 
   <mat-divider fxShow.gt-sm [vertical]="true" fxShow="false" ></mat-divider>
@@ -86,5 +84,5 @@
       <button mat-flat-button color="primary" (click)="updateLead(selectedLead) ">{{(selectedLead.id !== undefined)?'Update':'Create'}}</button>
     </div>
 
-</div>
+<!--</div>-->
 
