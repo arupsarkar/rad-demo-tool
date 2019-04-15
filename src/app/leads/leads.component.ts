@@ -56,6 +56,7 @@ export class LeadsComponent implements OnInit {
       this.leadsService.createLead(lead)
         .subscribe(newLead => {
           this.leads.push(newLead);
+          this.dataSource = new MatTableDataSource(this.leads);
         });
     }
     this.selectedLead = new Lead();
@@ -63,6 +64,13 @@ export class LeadsComponent implements OnInit {
   editLead(lead: Lead): void {
     this.selectedLead = lead;
   }
+
+
+deleteLead(lead: Lead): void {
+    this.leads = this.leads.filter(l => l !== lead);
+    this.leadsService.deleteLead(lead).subscribe();
+}
+
   // async refresh() {
   //   this.loading = true;
   //   const data = this.leads;

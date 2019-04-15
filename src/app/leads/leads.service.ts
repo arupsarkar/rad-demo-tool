@@ -78,6 +78,20 @@ export class LeadsService {
       catchError(this.handleError<Lead>('add Lead'))
     );
   }
+
+
+  deleteLead (lead: Lead | number): Observable<Lead> {
+    const id = typeof lead === 'number' ? lead : lead.id;
+    console.log('Deleted id : ', id);
+    const url = `${this.baseUrl}/api/leads/${id}`;
+    return this.http.delete<Lead>(url, httpOptions).pipe(
+      tap( res => {
+        console.log('deleteLead : ', res);
+        this.log(`deleted lead id=${id}`);
+      }),
+      catchError(this.handleError<Lead>('deleteLead'))
+    );
+  }
   /**
    * Handle Http operation that failed.
    * Let the app continue.
