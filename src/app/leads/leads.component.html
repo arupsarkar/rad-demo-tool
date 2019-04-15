@@ -50,9 +50,16 @@
   <mat-divider fxShow.gt-sm [vertical]="true" fxShow="false" ></mat-divider>
     <div>
       <h2>Selected Lead</h2>
-      <label>First Name
-        <input type="text" [(ngModel)]="selectedLead.firstname">
-      </label>
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="First Name" [(ngModel)]="selectedLead.firstname">
+        <mat-icon matSuffix>Required</mat-icon>
+        <mat-hint>First Name</mat-hint>
+      </mat-form-field>
+
+<!--      <label>First Name-->
+<!--        <input type="text" [(ngModel)]="selectedLead.firstname">-->
+<!--      </label>-->
       <label>Last Name
         <input type="text" [(ngModel)]="selectedLead.lastname">
       </label>
