@@ -52,17 +52,20 @@ const createLead = (request, response) => {
 };
 
 const updateLead = (request, response) => {
-  const id = parseInt(request.params.id);
-  const { name, email } = request.body;
+  const leadId = parseInt(request.params.id);
+  const { email, firstname, lastname,mobilephone,postalcode, sms_opt_in__c, id  } = request.body;
   console.log('---> updateLead : ', request.body);
+  console.log('---> updateLead Id : ', leadId);
   pool.query(
-    'UPDATE leads SET email = $1, firstname = $2, lastname = $3, mobilephone = $4, postalcode = $5, sms_opt_in__c = $6 WHERE id = ' + id,
-    [name, email, id],
+    'UPDATE leads SET email = $1, firstname = $2, lastname = $3, mobilephone = $4, postalcode = $5, sms_opt_in__c = $6 ' +
+      'WHERE id = ' + leadId + ' ' +
+      'RETURNING id, firstname, lastname, email, mobilephone, postalcode, sms_opt_in__c',
+    [email, firstname, lastname,mobilephone,postalcode, sms_opt_in__c, id],
     (error, results) => {
       if (error) {
         throw error
       }
-      response.status(200).send(`User modified with ID: ${id}`)
+      response.status(200).json(results.rows[0]);
     }
   )
 };

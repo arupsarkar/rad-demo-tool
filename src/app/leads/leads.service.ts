@@ -79,6 +79,18 @@ export class LeadsService {
     );
   }
 
+  updateLead(lead: Lead): Observable<any> {
+    const id = typeof lead === 'number' ? lead : lead.id;
+    console.log('updated id : ', id);
+    const url = `${this.baseUrl}/api/leads/${id}`;
+    return this.http.put(url, lead, httpOptions).pipe(
+      tap( res => {
+        this.log(`updated lead`);
+        console.log('Updated lead id : ' + res);
+      }),
+      catchError(this.handleError<any>('Error updating lead'))
+    );
+  }
 
   deleteLead (lead: Lead | number): Observable<Lead> {
     const id = typeof lead === 'number' ? lead : lead.id;

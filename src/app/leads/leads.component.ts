@@ -42,7 +42,12 @@ export class LeadsComponent implements OnInit {
 
   updateLead(lead: Lead): void {
     if (this.selectedLead.id !== undefined) {
-      console.log('leads component id ', lead.id);
+      console.log('update lead component id ', lead.id);
+      this.leadsService.updateLead(lead)
+        .subscribe(updatedLead => {
+          this.leads.push(updatedLead);
+          this.dataSource = new MatTableDataSource(this.leads);
+        });
     } else {
       lead.createddate = new Date();
       lead.systemmodstamp = new Date();
