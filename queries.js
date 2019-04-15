@@ -44,7 +44,9 @@ const createLead = (request, response) => {
       throw err
     }
     console.log('createLead results ', res.rows[0].id);
-    response.status(201).send(`Lead added with ID: ${res.rows[0].id}`)
+    console.log('createLead results ', res.rows[0]);
+    // response.status(201).send(`Lead added with ID: ${res.rows[0].id}`)
+    response.status(200).json(res.rows[0]);
   })
 };
 
