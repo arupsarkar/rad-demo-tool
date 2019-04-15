@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import {MatSort, MatTableDataSource} from '@angular/material';
 import { LeadsService } from './leads.service';
 import { Lead } from './lead';
@@ -9,7 +9,7 @@ import { Lead } from './lead';
   templateUrl: './leads.component.html',
   styleUrls: ['./leads.component.css']
 })
-export class LeadsComponent implements OnInit, AfterViewInit {
+export class LeadsComponent implements OnInit {
   // displayedColumns: string[] = ['firstname', 'lastname', 'email', 'mobile', 'edit', 'delete'];
   displayedColumns: string[] = ['firstname', 'lastname', 'email', 'mobilephone', 'postalcode', 'edit', 'delete'];
   dataSource = new MatTableDataSource<Lead>();
@@ -24,14 +24,13 @@ export class LeadsComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     console.log('ngOnInit leads component START ' );
     this.getLeads();
+    this.dataSource.sort = this.sort;
     console.log('ngOnInit leads component END ' );
     // this.refresh();
 
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
-  }
+
 
   getLeads(): void {
     console.log('getEvent leads component before service START ' );
