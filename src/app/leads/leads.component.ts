@@ -29,8 +29,7 @@ export class LeadsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     console.log('ngAfterViewInit() - Start');
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+
     console.log('ngAfterViewInit() - End');
   }
 
@@ -43,6 +42,8 @@ export class LeadsComponent implements OnInit, AfterViewInit {
         this.leads = leads;
         console.log('getEvent leads component data ' + this.leads );
         this.dataSource = new MatTableDataSource(this.leads);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
         console.log('getEvent leads component END ' );
       }, error => {
         console.log('getLeads components error' + error);
@@ -72,6 +73,8 @@ export class LeadsComponent implements OnInit, AfterViewInit {
         .subscribe(newLead => {
           this.leads.push(newLead);
           this.dataSource = new MatTableDataSource(this.leads);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
         });
     }
     this.selectedLead = new Lead();
@@ -86,6 +89,8 @@ deleteLead(lead: Lead): void {
     this.leadsService.deleteLead(lead).subscribe( res => {
       console.log(' delete response : ', res);
       this.dataSource = new MatTableDataSource(this.leads);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
     },
   error => {
       console.log('Error deleting record ', error);
