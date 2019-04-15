@@ -43,6 +43,7 @@ export class LeadsComponent implements OnInit {
   updateLead(lead: Lead): void {
     if (this.selectedLead.id !== undefined) {
       console.log('update lead component id ', lead.id);
+      lead.systemmodstamp = new Date();
       this.leadsService.updateLead(lead)
         .subscribe(updatedLead => {
           // this.leads.push(updatedLead);
