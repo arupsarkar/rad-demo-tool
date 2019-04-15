@@ -10,6 +10,7 @@ import { LeadsComponent } from './leads/leads.component';
 import { HomeComponent } from './home/home.component';
 import {MatListModule, MatTableModule} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MatTableModule,
     HttpClientModule,
-    MatListModule
+    MatListModule,
+    FormsModule
   ],
   exports: [
     FlexLayoutModule
