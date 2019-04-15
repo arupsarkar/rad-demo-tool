@@ -70,6 +70,10 @@ deleteLead(lead: Lead): void {
     this.leads = this.leads.filter(l => l !== lead);
     this.leadsService.deleteLead(lead).subscribe( res => {
       console.log(' delete response : ', res);
+      this.dataSource = new MatTableDataSource(this.leads);
+    },
+  error => {
+      console.log('Error deleting record ', error);
     });
 }
 
