@@ -51,7 +51,10 @@ export class LeadsComponent implements OnInit {
       lead.name = lead.firstname + ' ' + lead.lastname;
       console.log('new lead name ', lead.name);
       lead.sms_opt_in__c = false;
-      this.leadsService.createLead(lead);
+      this.leadsService.createLead(lead)
+        .subscribe(newLead => {
+          this.leads.push(newLead);
+        });
     }
     this.selectedLead = new Lead();
   }
