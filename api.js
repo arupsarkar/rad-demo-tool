@@ -49,7 +49,7 @@ router.get('/api', (req, res, next) => {
 
 router.get('/leads', db.getLeads);
 router.get('/leads/:id', db.getLeadById);
-router.post('/leads', db.createLead);
+router.post('/createlead', db.createLead);
 router.put('/leads/:id', db.updateLead);
 router.delete('/leads/:id', db.deleteLead);
 
