@@ -45,8 +45,8 @@ export class LeadsComponent implements OnInit {
       console.log('update lead component id ', lead.id);
       this.leadsService.updateLead(lead)
         .subscribe(updatedLead => {
-          this.leads.push(updatedLead);
-          this.dataSource = new MatTableDataSource(this.leads);
+          // this.leads.push(updatedLead);
+          // this.dataSource = new MatTableDataSource(this.leads);
         });
     } else {
       lead.createddate = new Date();
