@@ -37,7 +37,7 @@ const createLead = (request, response) => {
   const { createddate, email, firstname, isdeleted, lastname, mobilephone, name, postalcode, sms_opt_in__c, systemmodstamp } = request.body;
 
   pool.query('INSERT INTO leads (createddate, email, firstname, isdeleted, lastname, mobilephone, name, ' +
-                                'postalcode, sms_opt_in__c, systemmodstamp) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id',
+                                'postalcode, sms_opt_in__c, systemmodstamp) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id, firstname',
     [createddate, email, firstname, isdeleted, lastname, mobilephone, name, postalcode, sms_opt_in__c, systemmodstamp], (err, res) => {
     if (err) {
       console.error('Error committing transaction', err.stack);
@@ -71,9 +71,10 @@ const deleteLead = (request, response) => {
   console.log('---> deleteLead', id);
   pool.query('DELETE FROM leads WHERE id = $1', [id], (error, results) => {
     if (error) {
+      console.error('Error committing transaction', error.stack);
       throw error
     }
-    response.status(200).send(`User deleted with ID: ${id}`)
+    response.status(200).json({"success " : true});
   })
 };
 

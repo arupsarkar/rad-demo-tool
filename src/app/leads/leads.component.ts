@@ -68,7 +68,9 @@ export class LeadsComponent implements OnInit {
 
 deleteLead(lead: Lead): void {
     this.leads = this.leads.filter(l => l !== lead);
-    this.leadsService.deleteLead(lead).subscribe();
+    this.leadsService.deleteLead(lead).subscribe( res => {
+      console.log(' delete response : ', res);
+    });
 }
 
   // async refresh() {
