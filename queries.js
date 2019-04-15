@@ -43,7 +43,7 @@ const createLead = (request, response) => {
       throw error
     }
     console.log('createLead results ', results);
-    response.status(201).send(`Lead added with ID: ${results.insertId}`)
+    response.status(201).send(`Lead added with ID: ${results.id}`)
   })
 };
 
