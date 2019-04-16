@@ -11,12 +11,14 @@ import { HomeComponent } from './home/home.component';
 import {MatListModule, MatTableModule} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ContactsComponent } from './contacts/contacts.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LeadsComponent,
     HomeComponent,
+    ContactsComponent,
   ],
   imports: [
     BrowserModule,
