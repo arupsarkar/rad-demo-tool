@@ -19,6 +19,24 @@ const getContacts = (request, response) => {
     response.status(200).json(results.rows)
   })
 };
+
+const createContact = (request, response) => {
+  console.log('---> createContact : ', request.body);
+  const { createddate, email, firstname, isdeleted, lastname, mobilephone, name, postalcode, sms_opt_in__c, systemmodstamp } = request.body;
+
+  pool.query('INSERT INTO contacts (createddate, email, firstname, isdeleted, lastname, mobilephone, name, ' +
+    'postalcode, sms_opt_in__c, systemmodstamp) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) ' +
+    'RETURNING id, firstname, lastname, email, mobilephone, postalcode, sms_opt_in__c',
+    [createddate, email, firstname, isdeleted, lastname, mobilephone, name, postalcode, sms_opt_in__c, systemmodstamp], (err, res) => {
+      if (err) {
+        console.error('Error committing transaction', err.stack);
+        throw err
+      }
+      console.log('createContact results ', res.rows[0].id);
+      console.log('createContact results ', res.rows[0]);
+      response.status(200).json(res.rows[0]);
+    })
+};
 // Contacts api CRUD interfaces - END
 
 // Leads api CRUD interfaces - START
@@ -98,6 +116,7 @@ const deleteLead = (request, response) => {
 
 module.exports = {
   getContacts,
+  createContact,
   getLeads,
   getLeadById,
   createLead,

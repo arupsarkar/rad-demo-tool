@@ -50,7 +50,7 @@ router.get('/api', (req, res, next) => {
 //router calls for contacts - START
 router.get('/contacts', db.getContacts);
 // router.get('/contacts/:id', db.getContactById);
-// router.post('/contacts', db.createContact);
+router.post('/contacts', db.createContact);
 // router.put('/contacts/:id', db.updateContact);
 // router.delete('/contacts/:id', db.deleteContact);
 //router calls for contacts - END

@@ -62,6 +62,31 @@ export class ContactsComponent implements OnInit {
 
   updateContact(contact: Contact): void {
     console.log('Updated contact ', JSON.stringify(contact));
+    if (this.selectedContact.id !== undefined) {
+      console.log('update contact component id ', contact.id);
+      contact.systemmodstamp = new Date();
+      // this.contactsService.updateContact(contact)
+      //   .subscribe(updatedLead => {
+      //     // this.leads.push(updatedLead);
+      //     // this.dataSource = new MatTableDataSource(this.leads);
+      //   });
+    } else {
+      contact.createddate = new Date();
+      contact.systemmodstamp = new Date();
+      contact.name = contact.firstname + ' ' + contact.lastname;
+      console.log('new contact name ', contact.name);
+      contact.sms_opt_in__c = false;
+      this.contactsService.createContact(contact)
+        .subscribe(newContact => {
+          this.contacts.push(newContact);
+          this.dataSource = new MatTableDataSource(this.contacts);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+        });
+    }
+    this.selectedContact = new Contact();
+
+
   }
   deleteContact(contact: Contact): void {
     console.log('Deleted contact ', JSON.stringify(contact));

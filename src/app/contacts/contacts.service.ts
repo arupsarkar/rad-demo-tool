@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Contact } from './contact';
 import {Observable, of} from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import {Lead} from '../leads/lead';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -30,6 +31,16 @@ export class ContactsService {
       );
   }
 
+  createContact(contact: Contact): Observable<Contact> {
+    const url = this.baseUrl + '/api/contacts';
+    console.log('create contact url ', url);
+    return this.http.post(url, contact, httpOptions).pipe(
+      tap((newContact: Contact) => {
+        console.log('new contact id ', newContact.id);
+      }),
+      catchError(this.handleError<Contact>('add Contact'))
+    );
+  }
 
   /**
    * Handle Http operation that failed.
