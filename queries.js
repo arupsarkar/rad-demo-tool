@@ -37,6 +37,37 @@ const createContact = (request, response) => {
       response.status(200).json(res.rows[0]);
     })
 };
+
+const updateContact = (request, response) => {
+  const contactId = parseInt(request.params.id);
+  const { email, firstname, lastname,mobilephone,postalcode, sms_opt_in__c, systemmodstamp  } = request.body;
+  console.log('---> updateContact : ', request.body);
+  console.log('---> updateContact Id : ', contactId);
+  pool.query(
+    'UPDATE contacts SET email = $1, firstname = $2, lastname = $3, mobilephone = $4, postalcode = $5, sms_opt_in__c = $6, systemmodstamp = $7 ' +
+    'WHERE id = ' + contactId + ' ' +
+    'RETURNING id, firstname, lastname, email, mobilephone, postalcode, sms_opt_in__c',
+    [email, firstname, lastname,mobilephone,postalcode, sms_opt_in__c, systemmodstamp],
+    (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).json(results.rows[0]);
+    }
+  )
+};
+
+const deleteContact = (request, response) => {
+  const id = parseInt(request.params.id);
+  console.log('---> deleteContact', id);
+  pool.query('DELETE FROM contacts WHERE id = $1', [id], (error, results) => {
+    if (error) {
+      console.error('Error committing transaction', error.stack);
+      throw error
+    }
+    response.status(200).json({"success " : true});
+  })
+};
 // Contacts api CRUD interfaces - END
 
 // Leads api CRUD interfaces - START
@@ -117,6 +148,8 @@ const deleteLead = (request, response) => {
 module.exports = {
   getContacts,
   createContact,
+  updateContact,
+  deleteContact,
   getLeads,
   getLeadById,
   createLead,

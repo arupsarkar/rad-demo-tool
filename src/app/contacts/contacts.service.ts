@@ -42,6 +42,31 @@ export class ContactsService {
     );
   }
 
+  updateContact(contact: Contact): Observable<any> {
+    const id = typeof contact === 'number' ? contact : contact.id;
+    console.log('updated id : ', id);
+    const url = `${this.baseUrl}/api/contacts/${id}`;
+    return this.http.put(url, contact, httpOptions).pipe(
+      tap( res => {
+        this.log(`updated contact`);
+        console.log('Updated contact id : ' + res);
+      }),
+      catchError(this.handleError<any>('Error updating contact'))
+    );
+  }
+
+  deleteContact (contact: Contact | number): Observable<Contact> {
+    const id = typeof contact === 'number' ? contact : contact.id;
+    console.log('Deleted id : ', id);
+    const url = `${this.baseUrl}/api/contacts/${id}`;
+    return this.http.delete<Contact>(url, httpOptions).pipe(
+      tap( res => {
+        console.log('deleteContact : ', res);
+        this.log(`deleted contact id=${id}`);
+      }),
+      catchError(this.handleError<Contact>('deleteLead'))
+    );
+  }
   /**
    * Handle Http operation that failed.
    * Let the app continue.

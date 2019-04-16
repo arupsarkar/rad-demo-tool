@@ -4,15 +4,6 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import { ContactsService } from './contacts.service';
 
 
-
-
-// const CONTACT_DATA: Contact[] = [
-//   {id: 1, accountid: '', createddate: new Date(), email: 'arup.sarkar@salesforce.com', firstname: 'Arup', isdeleted: false, lastname: 'Sarkar', mobilephone: '6462697876', name: 'Arup Sarkar', postalcode: '08840', sms_opt_in__c: false, systemmodstamp: new Date()},
-//   {id: 2, accountid: '', createddate: new Date(), email: 'dolores.bungy@salesforce.com', firstname: 'Dolores', isdeleted: false, lastname: 'Bungy', mobilephone: '3473064757', name: 'Dolores Bungy', postalcode: '11355', sms_opt_in__c: false, systemmodstamp: new Date()},
-//   {id: 3, accountid: '', createddate: new Date(), email: 'jlung@salesforce.com', firstname: 'Jason', isdeleted: false, lastname: 'Lung', mobilephone: '3472121234', name: 'Jason Lung', postalcode: '11355', sms_opt_in__c: false, systemmodstamp: new Date()},
-//   {id: 4, accountid: '', createddate: new Date(), email: 'bjaplin@salesforce.com', firstname: 'Bryan', isdeleted: false, lastname: 'Japlin', mobilephone: '2123451234', name: 'Bryan Japlin', postalcode: '10022', sms_opt_in__c: false, systemmodstamp: new Date()},
-// ];
-
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
@@ -65,11 +56,10 @@ export class ContactsComponent implements OnInit {
     if (this.selectedContact.id !== undefined) {
       console.log('update contact component id ', contact.id);
       contact.systemmodstamp = new Date();
-      // this.contactsService.updateContact(contact)
-      //   .subscribe(updatedLead => {
-      //     // this.leads.push(updatedLead);
-      //     // this.dataSource = new MatTableDataSource(this.leads);
-      //   });
+      this.contactsService.updateContact(contact)
+        .subscribe(updatedContact => {
+          console.log('Updated contact : ', updatedContact);
+        });
     } else {
       contact.createddate = new Date();
       contact.systemmodstamp = new Date();
@@ -90,5 +80,15 @@ export class ContactsComponent implements OnInit {
   }
   deleteContact(contact: Contact): void {
     console.log('Deleted contact ', JSON.stringify(contact));
+    this.contacts = this.contacts.filter(l => l !== contact);
+    this.contactsService.deleteContact(contact).subscribe( res => {
+        console.log(' delete response : ', res);
+        this.dataSource = new MatTableDataSource(this.contacts);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      },
+      error => {
+        console.log('Error deleting record ', error);
+      });
   }
 }
