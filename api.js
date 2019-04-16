@@ -47,11 +47,20 @@ router.get('/api', (req, res, next) => {
   res.status(200).send({"data " : "hello world !!!"});
 });
 
+//router calls for contacts - START
+router.get('/contacts', db.getContacts);
+// router.get('/contacts/:id', db.getContactById);
+// router.post('/contacts', db.createContact);
+// router.put('/contacts/:id', db.updateContact);
+// router.delete('/contacts/:id', db.deleteContact);
+//router calls for contacts - END
+
+//router calls for leads - START
 router.get('/leads', db.getLeads);
 router.get('/leads/:id', db.getLeadById);
 router.post('/leads', db.createLead);
 router.put('/leads/:id', db.updateLead);
 router.delete('/leads/:id', db.deleteLead);
-
+//router calls for leads - END
 module.exports = router;
 

@@ -7,8 +7,21 @@ const pool = new Pool({
   password: '8d9cf4129ec0dadd619dc5b6e61c2698ae7814b5db5aa29dee228abb67679ea0',
   port: 5432,
 });
+// Contacts api CRUD interfaces - START
+const getContacts = (request, response) => {
+  pool.query('SELECT * FROM contacts ORDER BY id ASC', (error, results) => {
+    if (error) {
+      console.log('getContacts error : ' + error);
+      throw error
+    }else{
+      console.log('getContacts success : ' + JSON.stringify(results.rows));
+    }
+    response.status(200).json(results.rows)
+  })
+};
+// Contacts api CRUD interfaces - END
 
-
+// Leads api CRUD interfaces - START
 const getLeads = (request, response) => {
   pool.query('SELECT * FROM leads ORDER BY id ASC', (error, results) => {
     if (error) {
@@ -81,9 +94,10 @@ const deleteLead = (request, response) => {
     response.status(200).json({"success " : true});
   })
 };
-
+// Leads api CRUD interfaces - END
 
 module.exports = {
+  getContacts,
   getLeads,
   getLeadById,
   createLead,
